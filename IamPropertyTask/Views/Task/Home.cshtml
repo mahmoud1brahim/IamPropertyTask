@@ -1,0 +1,179 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = null;
+}
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Palindrome Test</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            min-height: 100%;
+            height: 100vh
+        }
+
+        .greenBackGround {
+            background-color: lawngreen;
+        }
+
+        .redBackGround {
+            background-color: red;
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-49%, -49%);
+            box-shadow: 0 2px 5px #f5f5f5;
+            background: #f5f5f5;
+        }
+
+        #csharpTextInput {
+        }
+
+        .sqlForm {
+        }
+
+        .jsForm {
+        }
+
+        input {
+            border-radius: 15px;
+            border: 1px solid black;
+            padding: 5px 15px;
+            text-align: center;
+        }
+
+        button {
+            border: 1px solid black;
+            border-radius: 8px;
+            color: limegreen;
+            padding: 5px 5px;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+
+        .subContainer {
+            margin: 30px 80px 63px 80px;
+        }
+
+            .subContainer img {
+                width: 39PX;
+                height: 30px;
+                background-size: contain;
+                margin: 0 10px;
+            }
+
+        .firstInput {
+            margin-bottom: 16px;
+        }
+
+        form {
+            justify-content: space-between;
+        }
+        form, .firstInput {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        span {
+            position: absolute;
+            z-index: 2;
+            color: black;
+            left: 70px;
+        }
+        .footer {
+            position: absolute;
+            top: 79%;
+            left: 62%;
+            transform: translate(-49%, -49%);
+        }
+            .footer img {
+                background-size: contain;
+            }
+
+    </style>
+</head>
+<body>
+    <img src="https://dustfast.s3.amazonaws.com/old-black-background-grunge-texture-dark-wallpaper-blackboard-chalkboard-room-wall_1258-28312+(1).png"
+         onload="this.style.opacity='1'" width="100%" height="100%" alt="background">
+
+    <div class="container">
+        <div class="subContainer">
+            <div class="firstInput">
+                <img src="https://dustfast.s3.amazonaws.com/csharpicon.png" />
+                <input type="text" asp-for="word" id="csharpTextInput" name="csharpTextInput" class="redBackGround">
+                <span>A</span>
+            </div>
+
+            <form action="/Task/ValidatePalindromCSharp" method="post" class="sqlForm">
+                <img src="https://dustfast.s3.amazonaws.com/csharpicon.png" />
+                <input type="text" asp-for="word" id="sqlTextInput" name="csharpTextInput" class="redBackGround">
+                <span>B</span>
+                <button type="submit" value="Submit"> GO </button>
+            </form>
+
+            <form action="/Task/ValidatePalindromCSharp" method="post" class="jsForm">
+                <img src="https://dustfast.s3.amazonaws.com/csharpicon.png" />
+                <input type="text" asp-for="word" id="javascriptTextInput" name="sqlTextInput" class="redBackGround">
+                <span>C</span>
+                <button type="submit" value="Submit"> GO </button>
+            </form>
+        </div>
+
+    </div>
+    <div class="footer">
+        <img src="https://dustfast.s3.amazonaws.com/old-black-background-grunge-texture-dark-wallpaper-blackboard-chalkboard-room-wall_1258-28312+(1).png" width="40%" height="20%" alt="sub-background" />
+    </div>
+    @*<script>
+            document.getElementById("img-background").style.opacity = "0";
+        </script>*@
+
+
+
+
+</body>
+
+</html>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+
+
+    //$(document).ready(function () {
+    //    $("#csharpTextInput").change(function () {
+    //        if ($("#csharpTextInput").text == "dog") {
+    //            $("#csharpTextInput").addClass("green")
+    //        }
+    //    })
+    //})
+
+    $('#csharpTextInput').on('input', function (e) {
+        if (palindrome($("#csharpTextInput").val()) == true) {
+            $("#csharpTextInput").removeClass("redBackGround")
+            $("#csharpTextInput").addClass("greenBackGround")
+        }
+        else {
+            $("#csharpTextInput").removeClass("greenBackGround")
+            $("#csharpTextInput").addClass("redBackGround")
+        }
+
+    });
+
+    function palindrome(str) {
+
+        var lowRegStr = str.toLowerCase().replaceAll(' ', '');
+
+        var reverseStr = lowRegStr.split('').reverse().join('');
+        console.log(lowRegStr)
+        console.log(reverseStr)
+        console.log('\n')
+        return reverseStr === lowRegStr;
+    }
+
+</script>

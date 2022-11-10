@@ -1,0 +1,68 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View</title>
+</head>
+@{
+    ViewBag.Title = "Home";
+}
+
+<h2>Home</h2>
+
+
+@using (Html.BeginForm("ValidatePalindromCSharp", "Task"))
+{
+    <input type="text" asp-for="word" id="csharpTextInput" name="csharpTextInput" class="redBackGround">
+
+    <input type="submit" value="Submit">
+}
+
+<br>
+<br />
+
+@using (Html.BeginForm("ValidatePalindromCSharp", "Task"))
+{
+    <input type="text" asp-for="word" id="csharpTextInput" name="csharpTextInput" class="redBackGround">
+
+    <input type="submit" value="Submit">
+}
+
+<br>
+<br />
+
+@using (Html.BeginForm("ValidatePalindromCSharp", "Task"))
+{
+    <input type="text" asp-for="word" id="csharpTextInput" name="csharpTextInput" class="redBackGround">
+
+    <input type="submit" value="Submit">
+}
+
+
+<style>
+
+    .blueBackGround {
+        background-color: blue;
+    }
+
+    .redBackGround {
+        background-color: red;
+    }
+</style>
+
+
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $("h1, h2, p").addClass("blue");
+    $("div").addClass("important");
+  });
+});
+</script>
+</html>
