@@ -12,18 +12,17 @@ namespace IamPropertyTask.Controllers
         // GET: Task
         public ActionResult Home()
         {
-            return View();
+            return View(new SubmitData { IsPalindromCSharp = false, CSharpInput = String.Empty, JavaScriptInput = String.Empty, SqlInput = String.Empty, IsPalindromSQL = false });
         }
         [HttpPost]
-        public ActionResult ValidatePalindromCSharp(string csharpTextInput)
+        public ActionResult ValidatePalindromCSharp(SubmitData data)
         {
-            csharpTextInput = csharpTextInput.Replace(" ","");
-            var isPalindrom  = csharpTextInput.SequenceEqual(csharpTextInput.Reverse());
-            if(isPalindrom)
-                //goes to the same view but removes changes
-                //TODO: send a model with the changes that happends
-                return View("home");
-            return new HttpStatusCodeResult(400);
+            if (data.CSharpInput != null)
+            {
+                var csharpTextInput = data.CSharpInput.Replace(" ", "");
+                data.IsPalindromCSharp = csharpTextInput.SequenceEqual(csharpTextInput.Reverse());
+            }
+            return View("home",data);
         }
        
     }

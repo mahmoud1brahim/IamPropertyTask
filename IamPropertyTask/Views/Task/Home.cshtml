@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IamPropertyTask.ViewModels.Task.SubmitData
+@{
     ViewBag.Title = "Home";
     Layout = null;
 }
@@ -75,51 +76,69 @@
         form {
             justify-content: space-between;
         }
+
         form, .firstInput {
             position: relative;
             display: flex;
             align-items: center;
         }
+
         span {
             position: absolute;
             z-index: 2;
             color: black;
             left: 70px;
         }
+
         .footer {
             position: absolute;
             top: 79%;
             left: 62%;
             transform: translate(-49%, -49%);
         }
+
             .footer img {
                 background-size: contain;
             }
-
     </style>
 </head>
 <body>
-    <img src="https://dustfast.s3.amazonaws.com/old-black-background-grunge-texture-dark-wallpaper-blackboard-chalkboard-room-wall_1258-28312+(1).png"
+    <img src="~/Content/Images/old-black-background-grunge-texture-dark-wallpaper-blackboard-chalkboard-room-wall_1258-28312 (1).png"
          onload="this.style.opacity='1'" width="100%" height="100%" alt="background">
 
     <div class="container">
         <div class="subContainer">
             <div class="firstInput">
-                <img src="https://dustfast.s3.amazonaws.com/csharpicon.png" />
+                <img src="~/Content/Images/javascript-vector-logo-yellow.png" />
                 <input type="text" asp-for="word" id="csharpTextInput" name="csharpTextInput" class="redBackGround">
                 <span>A</span>
             </div>
 
             <form action="/Task/ValidatePalindromCSharp" method="post" class="sqlForm">
-                <img src="https://dustfast.s3.amazonaws.com/csharpicon.png" />
-                <input type="text" asp-for="word" id="sqlTextInput" name="csharpTextInput" class="redBackGround">
+                <img src="~/Content/Images/sqlicon.png" />
+                @if (!Model.IsPalindromSQL)
+                {
+                    <input type="text" name="CSharpInput" id="CSharpInput" class="redBackGround"  value=@Model.SqlInput>
+                }
+                else
+                {
+                    <input type="text" name="CSharpInput" id="CSharpInput" class="redBackGround" value=@Model.SqlInput>
+                }
                 <span>B</span>
                 <button type="submit" value="Submit"> GO </button>
             </form>
 
             <form action="/Task/ValidatePalindromCSharp" method="post" class="jsForm">
-                <img src="https://dustfast.s3.amazonaws.com/csharpicon.png" />
-                <input type="text" asp-for="word" id="javascriptTextInput" name="sqlTextInput" class="redBackGround">
+                <img src="~/Content/Images/csharpicon.png" />
+
+                @if (!Model.IsPalindromCSharp)
+                {
+                    <input type="text" name="CSharpInput" id="CSharpInput" class="redBackGround" value=@Model.CSharpInput>
+                }
+                else
+                {
+                    <input type="text" name="CSharpInput" id="CSharpInput" class="greenBackGround" value=@Model.CSharpInput>
+                }
                 <span>C</span>
                 <button type="submit" value="Submit"> GO </button>
             </form>
@@ -127,7 +146,7 @@
 
     </div>
     <div class="footer">
-        <img src="https://dustfast.s3.amazonaws.com/old-black-background-grunge-texture-dark-wallpaper-blackboard-chalkboard-room-wall_1258-28312+(1).png" width="40%" height="20%" alt="sub-background" />
+        <img src="~/Content/Images/old-black-background-grunge-texture-dark-wallpaper-blackboard-chalkboard-room-wall_1258-28312 (1).png" width="40%" height="20%" alt="sub-background" />
     </div>
     @*<script>
             document.getElementById("img-background").style.opacity = "0";
@@ -164,6 +183,7 @@
         }
 
     });
+
 
     function palindrome(str) {
 
