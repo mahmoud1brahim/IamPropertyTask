@@ -33,14 +33,6 @@
             background: #f5f5f5;
         }
 
-        #csharpTextInput {
-        }
-
-        .sqlForm {
-        }
-
-        .jsForm {
-        }
 
         input {
             border-radius: 15px;
@@ -114,15 +106,15 @@
                 <span>A</span>
             </div>
 
-            <form action="/Task/ValidatePalindromCSharp" method="post" class="sqlForm">
+            <form action="/Task/ValidatePalindromSQL" method="post" class="sqlForm">
                 <img src="~/Content/Images/sqlicon.png" />
                 @if (!Model.IsPalindromSQL)
                 {
-                    <input type="text" name="CSharpInput" id="CSharpInput" class="redBackGround"  value=@Model.SqlInput>
+                    <input type="text" name="SqlInput" id="SqlInput" class="redBackGround" value=@Model.SqlInput>
                 }
                 else
                 {
-                    <input type="text" name="CSharpInput" id="CSharpInput" class="redBackGround" value=@Model.SqlInput>
+                    <input type="text" name="SqlInput" id="SqlInput" class="greenBackGround" value=@Model.SqlInput>
                 }
                 <span>B</span>
                 <button type="submit" value="Submit"> GO </button>
@@ -148,11 +140,6 @@
     <div class="footer">
         <img src="~/Content/Images/old-black-background-grunge-texture-dark-wallpaper-blackboard-chalkboard-room-wall_1258-28312 (1).png" width="40%" height="20%" alt="sub-background" />
     </div>
-    @*<script>
-            document.getElementById("img-background").style.opacity = "0";
-        </script>*@
-
-
 
 
 </body>
@@ -160,17 +147,11 @@
 </html>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+@Scripts.Render("~/bundles/jquery")
 <script>
 
 
-    //$(document).ready(function () {
-    //    $("#csharpTextInput").change(function () {
-    //        if ($("#csharpTextInput").text == "dog") {
-    //            $("#csharpTextInput").addClass("green")
-    //        }
-    //    })
-    //})
 
     $('#csharpTextInput').on('input', function (e) {
         if (palindrome($("#csharpTextInput").val()) == true) {
@@ -186,13 +167,13 @@
 
 
     function palindrome(str) {
+        if (str == null || str == "")
+            return false
 
         var lowRegStr = str.toLowerCase().replaceAll(' ', '');
 
         var reverseStr = lowRegStr.split('').reverse().join('');
-        console.log(lowRegStr)
-        console.log(reverseStr)
-        console.log('\n')
+  
         return reverseStr === lowRegStr;
     }
 
