@@ -1,3 +1,7 @@
+
+
+Create DATABASE Test
+
 USE [Test]
 GO
 
