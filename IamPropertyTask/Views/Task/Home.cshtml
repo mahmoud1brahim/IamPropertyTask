@@ -29,7 +29,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-49%, -49%);
-            box-shadow: 0 2px 5px #f5f5f5;
+            box-shadow: 10px 13px 10px #000000;
             background: #f5f5f5;
         }
 
@@ -85,8 +85,7 @@
         .footer {
             position: absolute;
             top: 79%;
-            left: 62%;
-            transform: translate(-49%, -49%);
+            left: 46%;
         }
 
             .footer img {
@@ -95,14 +94,14 @@
     </style>
 </head>
 <body>
-    <img src="~/Content/Images/old-black-background-grunge-texture-dark-wallpaper-blackboard-chalkboard-room-wall_1258-28312 (1).png"
+    <img src="~/Content/Images/background.png"
          onload="this.style.opacity='1'" width="100%" height="100%" alt="background">
 
     <div class="container">
         <div class="subContainer">
             <div class="firstInput">
                 <img src="~/Content/Images/javascript-vector-logo-yellow.png" />
-                <input type="text" asp-for="word" id="csharpTextInput" name="csharpTextInput" class="redBackGround">
+                @Html.TextBoxFor(m => Model.JavaScriptInput, new { name = "jsTextInput", id = "jsTextInput", Value = Model.JavaScriptInput, @class = "redBackGround" })
                 <span>A</span>
             </div>
 
@@ -110,12 +109,16 @@
                 <img src="~/Content/Images/sqlicon.png" />
                 @if (!Model.IsPalindromSQL)
                 {
-                    <input type="text" name="SqlInput" id="SqlInput" class="redBackGround" value=@Model.SqlInput>
+                    @Html.TextBoxFor(m => Model.SqlInput, new { name = "SqlInput", id = "SqlInput", Value = Model.SqlInput, @class = "redBackGround" })
                 }
                 else
                 {
-                    <input type="text" name="SqlInput" id="SqlInput" class="greenBackGround" value=@Model.SqlInput>
+                    @Html.TextBoxFor(m => Model.SqlInput, new { name = "SqlInput", id = "SqlInput", Value = Model.SqlInput, @class = "greenBackGround" })
                 }
+                <input type="hidden" name="CSharpInput" value=@Model.CSharpInput>
+                <input type="hidden" id="javaScriptInputSqlFrom" name="JavaScriptInput" value=@Model.JavaScriptInput>
+
+                @Html.HiddenFor(m => m.IsPalindromCSharp, new { Value = Model.IsPalindromCSharp })
                 <span>B</span>
                 <button type="submit" value="Submit"> GO </button>
             </form>
@@ -125,12 +128,16 @@
 
                 @if (!Model.IsPalindromCSharp)
                 {
-                    <input type="text" name="CSharpInput" id="CSharpInput" class="redBackGround" value=@Model.CSharpInput>
+                    @Html.TextBoxFor(m => Model.CSharpInput, new { name = "CSharpInput", id = "CSharpInput", Value = Model.CSharpInput, @class = "redBackGround" })
                 }
                 else
                 {
-                    <input type="text" name="CSharpInput" id="CSharpInput" class="greenBackGround" value=@Model.CSharpInput>
+                    @Html.TextBoxFor(m => Model.CSharpInput, new { name = "CSharpInput", id = "CSharpInput", Value = Model.CSharpInput, @class = "greenBackGround" })
                 }
+
+                <input type="hidden" name="SqlInput" value=@Model.SqlInput>
+                <input type="hidden" id="javaScriptInputCSharpFrom" name="JavaScriptInput" value=@Model.JavaScriptInput>
+                @Html.HiddenFor(m => m.IsPalindromSQL, new { Value = Model.IsPalindromSQL })
                 <span>C</span>
                 <button type="submit" value="Submit"> GO </button>
             </form>
@@ -138,7 +145,7 @@
 
     </div>
     <div class="footer">
-        <img src="~/Content/Images/old-black-background-grunge-texture-dark-wallpaper-blackboard-chalkboard-room-wall_1258-28312 (1).png" width="40%" height="20%" alt="sub-background" />
+        <img src="~/Content/Images/companyLogo.png" width="40%" height="20%" alt="sub-background" />
     </div>
 
 
@@ -150,20 +157,8 @@
 
 @Scripts.Render("~/bundles/jquery")
 <script>
-
-
-
-    $('#csharpTextInput').on('input', function (e) {
-        if (palindrome($("#csharpTextInput").val()) == true) {
-            $("#csharpTextInput").removeClass("redBackGround")
-            $("#csharpTextInput").addClass("greenBackGround")
-        }
-        else {
-            $("#csharpTextInput").removeClass("greenBackGround")
-            $("#csharpTextInput").addClass("redBackGround")
-        }
-
-    });
+    $('#jsTextInput').on('input', modifyInputClass);
+    jQuery(document).ready(modifyInputClass)
 
 
     function palindrome(str) {
@@ -177,4 +172,17 @@
         return reverseStr === lowRegStr;
     }
 
+    function modifyInputClass() {
+        if (palindrome($("#jsTextInput").val()) == true) {
+            $("#jsTextInput").removeClass("redBackGround")
+            $("#jsTextInput").addClass("greenBackGround")
+        }
+        else {
+            $("#jsTextInput").removeClass("greenBackGround")
+            $("#jsTextInput").addClass("redBackGround")
+        }
+        $("#javaScriptInputSqlFrom").val($("#jsTextInput").val())
+        $("#javaScriptInputCSharpFrom").val($("#jsTextInput").val())
+        console.log($("#jsTextInput").val())
+    }
 </script>
