@@ -21,8 +21,8 @@ namespace IamPropertyTask.Controllers
         {
                 if (data.CSharpInput != null)
                 {
-                    var jsTextInput = data.CSharpInput.Replace(" ", "");
-                    data.IsPalindromCSharp = jsTextInput.SequenceEqual(jsTextInput.Reverse());
+                    var CSharpTextInput = data.CSharpInput.Replace(" ", "");
+                    data.IsPalindromCSharp = CSharpTextInput.SequenceEqual(CSharpTextInput.Reverse());
                 }
                 return View("home", data);
         }
